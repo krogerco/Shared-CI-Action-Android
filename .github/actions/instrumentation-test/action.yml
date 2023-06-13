@@ -8,7 +8,7 @@ inputs:
   java_version:
     description: 'The version of java to use'
     required: true
-  InstrumentationTestScript:
+  instrumentation_test_script:
     description: 'The script to run for instrumentation test'
     required: true
 
@@ -31,7 +31,7 @@ runs:
         arch: x86_64
         disable-animations: true
         emulator-options: -no-snapshot -no-window -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect
-        script: ${{ inputs.InstrumentationTestScript }}
+        script: ${{ inputs.instrumentation_test_script }}
     - name: Merge Reports
       if: ${{ success() || steps.instrumentation_tests.outcome == 'failure' }}
       shell: bash
