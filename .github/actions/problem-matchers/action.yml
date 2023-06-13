@@ -1,0 +1,12 @@
+name: Problem Matchers
+description: 'Applies problem matchers to highlight warnings and errors in the job log'
+
+runs:
+  using: composite
+  steps:
+    - name: Add Problem Matchers
+      shell: bash
+      run: |
+        echo "::add-matcher::$GITHUB_ACTION_PATH/gradle_matcher.json"
+        echo "::add-matcher::$GITHUB_ACTION_PATH/kotlin_matcher.json"
+        echo "::add-matcher::$GITHUB_ACTION_PATH/android_lint_matcher.json"

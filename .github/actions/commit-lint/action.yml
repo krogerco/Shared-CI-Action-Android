@@ -1,0 +1,36 @@
+name: Commit Lint
+description: 'Uses commitlint npm packages to verify commits are formatted as expected'
+
+inputs:
+  node_version:
+    description: 'The version of nodejs to use'
+    required: true
+  commitlint_version:
+    description: 'The version of commitlint to use'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v3.6.0
+      with:
+        node-version: ${{ inputs.node_version }}
+    - name: Install node commitlint
+      shell: bash
+      run: npm install -g @commitlint/config-conventional@${{ inputs.commitlint_version }} @commitlint/cli@${{ inputs.commitlint_version }}
+    - name: Configure node commitlint
+      shell: bash
+      run: |
+        CONFIG_COMMITLINT=$(cat << JSON
+          {
+            "extends": [
+              "@commitlint/config-conventional"
+            ]
+          }
+        JSON
+        )
+        echo $CONFIG_COMMITLINT > .commitlintrc.json
+    - name: Run Git commit lint
+      shell: bash
+      run: git log --pretty=format:"%s" $(git describe --tags --abbrev=0 @^)..@ | while read line; do echo "$line" | commitlint; done

@@ -1,0 +1,87 @@
+/__w/sample-project/app/src/main/AndroidManifest.xml:575: Error: This class should provide a default constructor (a public constructor with no arguments) (com.sampleapp.SampleActivity) [Instantiatable]
+            android:name=".SampleActivity"
+                          ~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Instantiatable":
+   Activities, services, broadcast receivers etc. registered in the manifest
+   file (or for custom views, in a layout file) must be "instantiatable" by
+   the system, which means that the class must be public, it must have an
+   empty public constructor, and if it's an inner class, it must be a static
+   inner class.
+
+/__w/sample-project/app/src/main/res/values-large/dimens.xml:3: Error: The dimen "sample_dimen" in values-large has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <dimen name="sample_dimen">14dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+/__w/sample-project/app/src/main/res/values-xlarge/dimens.xml:3: Error: The dimen "sample_dimen" in values-xlarge has no declaration in the base values folder; this can lead to crashes when the resource is queried in a configuration that does not match this qualifier [MissingDefaultResource]
+    <dimen name="sample_dimen">18dp</dimen>
+           ~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "MissingDefaultResource":
+   If a resource is only defined in folders with qualifiers like -land or -en,
+   and there is no default declaration in the base folder (layout or values
+   etc), then the app will crash if that resource is accessed on a device
+   where the device is in a configuration missing the given qualifier.
+
+   As a special case, drawables do not have to be specified in the base
+   folder; if there is a match in a density folder (such as drawable-mdpi)
+   that image will be used and scaled. Note however that if you  only specify
+   a drawable in a folder like drawable-en-hdpi, the app will crash in
+   non-English locales.
+
+   There may be scenarios where you have a resource, such as a -fr drawable,
+   which is only referenced from some other resource with the same qualifiers
+   (such as a -fr style), which itself has safe fallbacks. However, this still
+   makes it possible for somebody to accidentally reference the drawable and
+   crash, so it is safer to create a default fallback in the base folder.
+   Alternatively, you can suppress the issue by adding
+   tools:ignore="MissingDefaultResource" on the element.
+
+   (This scenario frequently happens with string translations, where you might
+   delete code and the corresponding resources, but forget to delete a
+   translation. There is a dedicated issue id for that scenario, with the id
+   ExtraTranslation.)
+
+/__w/sample-project/app/src/main/res/layout/sample_layout.xml:92: Error: sample_view_2 is not a sibling in the same ConstraintLayout [NotSibling]
+            app:constraint_referenced_ids="sample_view_1,sample_view_2"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/__w/sample-project/app/src/main/res/layout/sample_layout.xml:92: Error: sample_view_1 is not a sibling in the same ConstraintLayout [NotSibling]
+            app:constraint_referenced_ids="sample_view_1,sample_view_2"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotSibling":
+   Layout constraints in a given ConstraintLayout or RelativeLayout should
+   reference other views within the same relative layout (but not itself!)
+
+/__w/sample-project/app/src/main/res/values-sw600dp-land/strings.xml:4: Error: "sample_string" is translated here but not found in default locale [ExtraTranslation]
+ <string name="sample_string">I\'m a sample String!</string>
+         ~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ExtraTranslation":
+   If a string appears in a specific language translation file, but there is
+   no corresponding string in the default locale, then this string is probably
+   unused. (It's technically possible that your application is only intended
+   to run in a specific locale, but it's still a good idea to provide a
+   fallback.)
+
+   Note that these strings can lead to crashes if the string is looked up on
+   any locale not providing a translation, so it's important to clean them
+   up.
+
+/__w/sample-project/app/src/main/java/com/sampleapp/ui/SampleViewModel.kt:255: Error: Cannot set non-nullable LiveData value to null [NullSafeMutableLiveData from androidx.lifecycle]
+        sampleMutableLiveData.postValue(null)
+                                        ~~~~
+
+   Explanation for issues of type "NullSafeMutableLiveData":
+   This check ensures that LiveData values are not null when explicitly
+            declared as non-nullable.
+
+                   Kotlin interoperability does not support enforcing explicit
+   null-safety when using                 generic Java type parameters. Since
+   LiveData is a Java class its value can always                 be null even
+   when its type is explicitly declared as non-nullable. This can lead
+           to runtime exceptions from reading a null LiveData value that is
+   assumed to be                 non-nullable.
+
+   Vendor: Android Open Source Project
+   Identifier: androidx.lifecycle
+   Feedback: https://issuetracker.google.com/issues/new?component=413132
