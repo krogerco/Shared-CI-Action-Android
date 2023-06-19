@@ -37,7 +37,7 @@ runs:
       shell: bash
       run: |
         npm install junit-report-merger
-        ./node_modules/.bin/jrm ./instrumentation_test_report.xml "**/build/outputs/androidTest-results/connected/flavors/*/*.xml"
+        ./node_modules/.bin/jrm ./instrumentation_test_report.xml "**/build/outputs/androidTest-results/connected/**/TEST-*.xml"
     - name: Upload Report Artifact
       if: ${{ success() || steps.instrumentation_tests.outcome == 'failure' }}
       uses: actions/upload-artifact@v3
@@ -50,4 +50,4 @@ runs:
       uses: mikepenz/action-junit-report@v3
       with:
         check_name: "Instrumentation Test Report"
-        report_paths: "**/build/outputs/androidTest-results/connected/flavors/*/*.xml"
+        report_paths: "**/build/outputs/androidTest-results/connected/**/TEST-*.xml"
