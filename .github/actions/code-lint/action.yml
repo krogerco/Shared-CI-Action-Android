@@ -2,11 +2,11 @@ name: Code Lint
 description: 'Uses ktlint to verify code is formatted'
 
 inputs:
-  ktlint_version:
-    description: 'The version of ktlint to use'
-    required: true
   java_version:
     description: 'The version of java to use'
+    required: true
+  ktlint_version:
+    description: 'The version of ktlint to use'
     required: true
 
 runs:

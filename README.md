@@ -8,17 +8,17 @@ Shared actions used by Kroger's GitHub actions.
     - Inputs:
         - Java Version - 17 is recommended
 - [Code Lint](.github/actions/code-lint)
-    - Runs [ktlint](https://github.com/pinterest/ktlint) with the specified version
+    - Runs [ktlint](https://github.com/pinterest/ktlint) with the specified version.
     - Inputs:
         - ktlint version, e.g. `0.46.1`
         - Java Version - 17 is recommended
 - [Commit Lint](.github/actions/commit-lint)
-    - Runs [commitlint](https://www.npmjs.com/package/@commitlint/cli) against commits to ensure they meet requirements and to protect the `Determine Version` and `Release` steps
+    - Runs [commitlint](https://www.npmjs.com/package/@commitlint/cli) against commits to ensure they meet requirements and to protect the `Determine Version` and `Release` steps.
     - Inputs:
         - NodeJS Version - 18 is recommended
         - Commitlint Version - 17+ is recommended
 - [Determine Version](.github/actions/determine-version)
-    - Uses [Semantic Release](https://github.com/semantic-release/semantic-release) to determine if the new commits should trigger a release
+    - Uses [Semantic Release](https://github.com/semantic-release/semantic-release) to determine if the new commits should trigger a release.
     - Inputs:
         - NodeJS Version - 18 is recommended
         - Semantic Release Version - 21+ recommended
@@ -30,7 +30,7 @@ Shared actions used by Kroger's GitHub actions.
         - Java Version - 17 is recommended
         - Setup Android SDK - Whether or not to run `android-actions/setup-android@v2` before executing the Gradle Command task.
 - [Instrumented Tests](.github/actions/instrumentation-test)
-    - Runs Instrumented tests for an Android project
+    - Runs Instrumented tests for an Android project.
     - Inputs:
         - Java Version - 17 is recommended
         - API Level - The Android API level of the emulator to use
@@ -38,11 +38,11 @@ Shared actions used by Kroger's GitHub actions.
 - [Problem Matchers](.github/actions/problem-matchers)
     - Adds [Problem Matchers](https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md) which highlight build errors and warnings in the job log and create annotations for them.
 - [Publish](.github/actions/publish)
-    - Run `gradle publish` for your project
+    - Runs `gradle publish` for your project.
     - Inputs:
         - Java Version - 17 is recommended
 - [Release](.github/actions/release)
-    - Uses [Semantic Release](https://github.com/semantic-release/semantic-release) to create a release/tag on github of the version calculated using prior releases and new commits
+    - Uses [Semantic Release](https://github.com/semantic-release/semantic-release) to create a release/tag on github of the version calculated using prior releases and new commits.
     - Inputs:
         - NodeJS Version - 18 is recommended
         - Semantic Release Version - 21+ recommended

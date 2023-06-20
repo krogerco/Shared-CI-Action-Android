@@ -1,5 +1,5 @@
 name: Unit Tests
-description: 'Performs unit tests'
+description: 'Runs unit tests and publishes results'
 
 inputs:
   java_version:

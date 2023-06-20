@@ -16,7 +16,7 @@ runs:
         java-version: ${{ inputs.java_version }}
     - name: Setup Android SDK
       uses: android-actions/setup-android@v2
-    - name: Build
+    - name: Gradle Assemble
       uses: gradle/gradle-build-action@v2
       with:
         arguments: assemble

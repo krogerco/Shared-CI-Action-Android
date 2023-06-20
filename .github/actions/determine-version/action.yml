@@ -2,26 +2,26 @@ name: Determine Version
 description: 'Analyzes commits and github releases to calculate version'
 
 inputs:
+  conventional_changelog_version:
+    description: 'The version of conventional changelog to use'
+    required: true
   node_version:
     description: 'The version of nodejs to use'
     required: true
   semantic_release_version:
     description: 'The version of semantic release to use'
     required: true
-  conventional_changelog_version:
-    description: 'The version of conventional changelog to use'
-    required: true
 
 outputs:
-  releaseType:
-    description: "Semantic type, e.g. major, minor, patch"
-    value: ${{ steps.dv.outputs.RELEASE_TYPE }}
-  releaseChannel:
-    description: "Stable or Pre-release"
-    value: ${{ steps.dv.outputs.RELEASE_CHANNEL }}
   buildVersion:
     description: "The calculated version"
     value: ${{ steps.dv.outputs.BUILD_VERSION }}
+  releaseChannel:
+    description: "Stable or Pre-release"
+    value: ${{ steps.dv.outputs.RELEASE_CHANNEL }}
+  releaseType:
+    description: "Semantic type, e.g. major, minor, patch"
+    value: ${{ steps.dv.outputs.RELEASE_TYPE }}
 
 runs:
   using: composite

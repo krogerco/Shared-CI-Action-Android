@@ -1,5 +1,5 @@
 name: Instrumentation Tests
-description: ' Verify instrumentation tests are passed'
+description: 'Runs instrumentation tests and publishes results'
 
 inputs:
   api_level:
@@ -15,7 +15,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Set Up JDK
+    - name: Java Setup
       uses: actions/setup-java@v3.9.0
       with:
         distribution: 'zulu'

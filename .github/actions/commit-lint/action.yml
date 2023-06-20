@@ -2,11 +2,11 @@ name: Commit Lint
 description: 'Uses commitlint npm packages to verify commits are formatted as expected'
 
 inputs:
-  node_version:
-    description: 'The version of nodejs to use'
-    required: true
   commitlint_version:
     description: 'The version of commitlint to use'
+    required: true
+  node_version:
+    description: 'The version of nodejs to use'
     required: true
 
 runs:

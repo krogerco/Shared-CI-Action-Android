@@ -1,5 +1,5 @@
 name: Publish
-description: 'Publish the artifactory '
+description: 'Publish artifacts'
 
 inputs:
   java_version:
@@ -9,7 +9,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup Java
+    - name: Java Setup
       uses: actions/setup-java@v3.9.0
       with:
         distribution: 'zulu'
