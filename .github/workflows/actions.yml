@@ -1,0 +1,8 @@
+name: Actions Release
+
+on: push
+
+jobs:
+  semantic_library_workflow:
+    name: push
+    uses: krogerco/Shared-CI-Workflow-Android/.github/workflows/meta_workflow.yml@main
