@@ -1,0 +1,30 @@
+name: Unit Tests
+description: 'Runs unit tests and publishes results'
+
+inputs:
+  java_version:
+    description: 'The version of Java to use'
+    required: true
+  test_command:
+    description: 'The gradle command for running your tests'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Java Setup
+      uses: actions/setup-java@v3.9.0
+      with:
+        distribution: 'zulu'
+        java-version: ${{ inputs.java_version }}
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+    - name: Gradle Test
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: ${{ inputs.test_command }}
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v3
+      if: success() || failure()
+      with:
+        report_paths: '**/build/test-results/**/TEST-*.xml'

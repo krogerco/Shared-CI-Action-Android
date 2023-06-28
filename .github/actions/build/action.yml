@@ -1,0 +1,22 @@
+name: Build
+description: 'Build app'
+
+inputs:
+  java_version:
+    description: 'The version of java to use'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Java Setup
+      uses: actions/setup-java@v3.9.0
+      with:
+        distribution: 'zulu'
+        java-version: ${{ inputs.java_version }}
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+    - name: Gradle Assemble
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: assemble

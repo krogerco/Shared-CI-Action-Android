@@ -1,0 +1,20 @@
+# These should all be detected by kotlin-warning
+w: /__w/sample-project/app/build/generated/ksp/sampleappRelease/kotlin/com/sampleapp/SampleProvider.kt: (95, 40): This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+
+w: /__w/sample-project/app/src/main/java/com/sampleapp/ui/SampleActivity.kt: (215, 9): 'startActivityForResult(Intent!, Int): Unit' is deprecated. Deprecated in Java
+
+w: /__w/sample-project/app/src/main/java/com/sampleapp/SampleClass.kt: (312, 13): Parameter 'identifier' is never used
+
+# These should all be detected by kotlin-error
+e: /__w/sample-project/buildSrc/buildSrc/src/main/java/Dependencies.kt: (418, 64): Overload resolution ambiguity:
+
+e: /__w/sample-project/buildSrc/buildSrc/src/main/java/Dependencies.kt: (418, 9): Const 'val' initializer should be a constant value
+
+e: /__w/sample-project/buildSrc/buildSrc/src/main/java/Dependencies.kt: (250, 19): Conflicting declarations: public const final val myVal: String, public const final val myVal: String
+
+e: /__w/sample-project/app/features/samplefeature/src/main/java/com/sampleapp/viewmodels/SampleViewModel.kt: (162, 26): Unresolved reference: SampleEvents
+
+# These should all be detected by kotlin-file-warning
+w: Flag is not supported by this version of the compiler: -Xuse-experimental=kotlin.Experimental
+
+w: '-Xjvm-default=enable' is deprecated, please use '-Xjvm-default=all|all-compatibility'
