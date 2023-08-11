@@ -1,0 +1,77 @@
+name: Code Coverage Report
+description: 'Adds a comment to PRs with code coverage'
+
+inputs:
+  coverage-counter-type:
+    description: 'Report counter type used to calculate coverage metrics. Possible values are: INSTRUCTION, LINE or BRANCH.'
+    required: true
+    default: 'LINE'
+  gradle_command:
+    description: 'The gradle command to execute to generate the code coverage report'
+    required: true
+    default: 'koverXmlReport'
+  java_distribution:
+    description: 'The distribution of Java to use'
+    required: false
+    default: 'zulu'
+  java_version:
+    description: 'The version of java to use'
+    required: true
+  min_coverage_changed_files:
+    description: 'The minimum code coverage that is required to pass for changed files'
+    required: false
+    default: ''
+  min_coverage_overall:
+    description: 'The minimum code coverage that is required to pass for overall project'
+    required: false
+    default: ''
+  path:
+    description: 'Path to the generated code coverage file'
+    required: true
+  title:
+    description: 'Title for the pull request comment'
+    required: false
+    default: ''
+  token:
+    description: 'Github token to use when adding commits to the pull request'
+    required: true
+  update_comment:
+    description: 'Update the coverage report comment instead of creating a new one. Requires title to be set.'
+    required: false
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - name: Java Setup
+      uses: actions/setup-java@v3
+      with:
+        distribution: ${{ inputs.java_distribution }}
+        java-version: ${{ inputs.java_version }}
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v2
+
+    - name: Run code coverage gradle command
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: ${{ inputs.gradle_command }}
+
+    - name: Add coverage to PR comment
+      id: code_coverage_report
+      uses: mi-kas/kover-report@v1
+      with:
+        path: ${{ inputs.path }}
+        token: ${{ inputs.token }}
+        title: ${{ inputs.title }}
+        update-comment: ${{ inputs.update_comment }}
+        min-coverage-overall: ${{ inputs.min_coverage_overall }}
+        min-coverage-changed-files: ${{ inputs.min_coverage_changed_files }}
+        coverage-counter-type: ${{ inputs.coverage_counter_type }}
+
+    - name: Add coverage to workflow summary
+      shell: bash
+      run: |
+        echo "### Code Coverage" >> $GITHUB_STEP_SUMMARY
+        echo "Overall Coverage: ${{ steps.code_coverage_report.outputs.coverage-overall }}" >> $GITHUB_STEP_SUMMARY
+        echo "Coverage Changed Files: ${{ steps.code_coverage_report.outputs.coverage-changed-files }}" >> $GITHUB_STEP_SUMMARY
