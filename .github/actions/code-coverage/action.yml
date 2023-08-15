@@ -4,40 +4,33 @@ description: 'Adds a comment to PRs with code coverage'
 inputs:
   coverage_counter_type:
     description: 'Report counter type used to calculate coverage metrics. Possible values are: INSTRUCTION, LINE or BRANCH.'
-    required: true
     default: 'LINE'
   gradle_command:
     description: 'The gradle command to execute to generate the code coverage report'
-    required: true
     default: 'koverXmlReport'
   java_distribution:
     description: 'The distribution of Java to use'
-    required: false
     default: 'zulu'
   java_version:
     description: 'The version of java to use'
     required: true
   min_coverage_changed_files:
     description: 'The minimum code coverage that is required to pass for changed files'
-    required: false
     default: ''
   min_coverage_overall:
     description: 'The minimum code coverage that is required to pass for overall project'
-    required: false
     default: ''
   path:
     description: 'Path to the generated code coverage file'
     required: true
   title:
     description: 'Title for the pull request comment'
-    required: false
     default: ''
   token:
     description: 'Github token to use when adding commits to the pull request'
     required: true
   update_comment:
     description: 'Update the coverage report comment instead of creating a new one. Requires title to be set.'
-    required: false
     default: 'false'
 
 runs:
