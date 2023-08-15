@@ -2,7 +2,7 @@ name: Code Coverage Report
 description: 'Adds a comment to PRs with code coverage'
 
 inputs:
-  coverage-counter-type:
+  coverage_counter_type:
     description: 'Report counter type used to calculate coverage metrics. Possible values are: INSTRUCTION, LINE or BRANCH.'
     required: true
     default: 'LINE'
