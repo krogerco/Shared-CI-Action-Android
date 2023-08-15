@@ -7,6 +7,19 @@ Shared actions used by Kroger's GitHub actions.
     - Uses `gradle/gradle-build-action@v2` and calls `assemble`
     - Inputs:
         - Java Version - 17 is recommended
+- [Code Coverage](.github/actions/code-coverage)
+    - Runs [kover-report](https://github.com/mi-kas/kover-report) with the specified inputs.
+    - Inputs:
+        - Coverage Counter Type - Report counter type used to calculate coverage metrics. Possible values are: INSTRUCTION, LINE or BRANCH.
+        - Gradle Command - The gradle command to execute to generate the code coverage report
+        - Java Distribution - The distribution of Java to use
+        - Java Version - 17 is recommended
+        - Min Coverage Changed Files - The minimum code coverage that is required to pass for changed files
+        - Min Coverage Overall - The minimum code coverage that is required to pass for overall project
+        - Path - Path to the generated code coverage file
+        - Title - Title for the pull request comment
+        - Token - Github token to use when adding commits to the pull request
+        - Update Comment - Update the coverage report comment instead of creating a new one. Requires title to be set.
 - [Code Lint](.github/actions/code-lint)
     - Runs [ktlint](https://github.com/pinterest/ktlint) with the specified version.
     - Inputs:
@@ -26,7 +39,8 @@ Shared actions used by Kroger's GitHub actions.
 - [Gradle Task](.github/actions/gradle-task)
     - Uses `gradle/gradle-build-action@v2` and calls the Gradle Command input.
     - Inputs:
-        - Gradle Command - The gradle task to execute'
+        - Gradle Command - The gradle task to execute
+        - Java Distribution - The distribution of Java to use
         - Java Version - 17 is recommended
         - Setup Android SDK - Whether or not to run `android-actions/setup-android@v2` before executing the Gradle Command task.
 - [Instrumented Tests](.github/actions/instrumentation-test)
