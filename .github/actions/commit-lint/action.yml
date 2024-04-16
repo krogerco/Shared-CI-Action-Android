@@ -13,7 +13,7 @@ runs:
   using: composite
   steps:
     - name: Setup Node
-      uses: actions/setup-node@v3.6.0
+      uses: actions/setup-node@v4.0.2
       with:
         node-version: ${{ inputs.node_version }}
     - name: Install node commitlint

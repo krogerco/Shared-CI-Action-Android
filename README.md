@@ -28,12 +28,12 @@ Shared actions used by Kroger's GitHub actions.
 - [Commit Lint](.github/actions/commit-lint)
     - Runs [commitlint](https://www.npmjs.com/package/@commitlint/cli) against commits to ensure they meet requirements and to protect the `Determine Version` and `Release` steps.
     - Inputs:
-        - NodeJS Version - 18 is recommended
+        - NodeJS Version - 20 is recommended
         - Commitlint Version - 17+ is recommended
 - [Determine Version](.github/actions/determine-version)
     - Uses [Semantic Release](https://github.com/semantic-release/semantic-release) to determine if the new commits should trigger a release.
     - Inputs:
-        - NodeJS Version - 18 is recommended
+        - NodeJS Version - 20 is recommended
         - Semantic Release Version - 21+ recommended
         - Conventional Changelog Version - 5+ recommended
 - [Gradle Task](.github/actions/gradle-task)
@@ -58,7 +58,7 @@ Shared actions used by Kroger's GitHub actions.
 - [Release](.github/actions/release)
     - Uses [Semantic Release](https://github.com/semantic-release/semantic-release) to create a release/tag on github of the version calculated using prior releases and new commits.
     - Inputs:
-        - NodeJS Version - 18 is recommended
+        - NodeJS Version - 20 is recommended
         - Semantic Release Version - 21+ recommended
         - Conventional Changelog Version - 5+ recommended
 - [Unit Tests](.github/actions/unit-tests)
