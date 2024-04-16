@@ -43,10 +43,10 @@ runs:
         java-version: ${{ inputs.java_version }}
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+      uses: android-actions/setup-android@v3
 
     - name: Run code coverage gradle command
-      uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v3
       with:
         arguments: ${{ inputs.gradle_command }}
 

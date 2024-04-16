@@ -13,18 +13,18 @@ runs:
   using: composite
   steps:
     - name: Java Setup
-      uses: actions/setup-java@v3.9.0
+      uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: ${{ inputs.java_version }}
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+      uses: android-actions/setup-android@v3
     - name: Gradle Test
-      uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v3
       with:
         arguments: ${{ inputs.test_command }}
     - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v3
+      uses: mikepenz/action-junit-report@v4
       if: success() || failure()
       with:
         report_paths: '**/build/test-results/**/TEST-*.xml'

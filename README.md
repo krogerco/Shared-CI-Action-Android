@@ -4,7 +4,7 @@ Shared actions used by Kroger's GitHub actions.
 
 ## Actions
 - [Build](.github/actions/build)
-    - Uses `gradle/gradle-build-action@v2` and calls `assemble`
+    - Uses `gradle/gradle-build-action` and calls `assemble`
     - Inputs:
         - Java Version - 17 is recommended
 - [Code Coverage](.github/actions/code-coverage)
@@ -37,12 +37,12 @@ Shared actions used by Kroger's GitHub actions.
         - Semantic Release Version - 21+ recommended
         - Conventional Changelog Version - 5+ recommended
 - [Gradle Task](.github/actions/gradle-task)
-    - Uses `gradle/gradle-build-action@v2` and calls the Gradle Command input.
+    - Uses `gradle/gradle-build-action` and calls the Gradle Command input.
     - Inputs:
         - Gradle Command - The gradle task to execute
         - Java Distribution - The distribution of Java to use
         - Java Version - 17 is recommended
-        - Setup Android SDK - Whether or not to run `android-actions/setup-android@v2` before executing the Gradle Command task.
+        - Setup Android SDK - Whether or not to run `android-actions/setup-android` before executing the Gradle Command task.
 - [Instrumented Tests](.github/actions/instrumentation-test)
     - Runs Instrumented tests for an Android project.
     - Inputs:
@@ -62,7 +62,7 @@ Shared actions used by Kroger's GitHub actions.
         - Semantic Release Version - 21+ recommended
         - Conventional Changelog Version - 5+ recommended
 - [Unit Tests](.github/actions/unit-tests)
-    - Uses `gradle/gradle-build-action@v2` and calls the Test Command input. Test results are published using `mikepenz/action-junit-report@v3`.
+    - Uses `gradle/gradle-build-action` and calls the Test Command input. Test results are published using `mikepenz/action-junit-report`.
     - Inputs:
         - Java Version - 17 is recommended
         - Test Command - The gradle task to run your tests, e.g. `test`
