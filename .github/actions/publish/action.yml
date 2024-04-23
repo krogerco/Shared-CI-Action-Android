@@ -10,13 +10,13 @@ runs:
   using: composite
   steps:
     - name: Java Setup
-      uses: actions/setup-java@v3.9.0
+      uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: ${{ inputs.java_version }}
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+      uses: android-actions/setup-android@v3
     - name: Gradle Publish
-      uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v3
       with:
         arguments: publish
