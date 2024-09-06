@@ -1,0 +1,14 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "dagger-errors",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "^error:(.*)$",
+          "message": 1
+        }
+      ]
+    }
+  ]
+}

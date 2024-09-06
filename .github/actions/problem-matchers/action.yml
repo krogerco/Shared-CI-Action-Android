@@ -10,3 +10,4 @@ runs:
         echo "::add-matcher::$GITHUB_ACTION_PATH/gradle_matcher.json"
         echo "::add-matcher::$GITHUB_ACTION_PATH/kotlin_matcher.json"
         echo "::add-matcher::$GITHUB_ACTION_PATH/android_lint_matcher.json"
+        echo "::add-matcher::$GITHUB_ACTION_PATH/dagger_matcher.json"
