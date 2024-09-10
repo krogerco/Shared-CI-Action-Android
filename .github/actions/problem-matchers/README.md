@@ -1,6 +1,8 @@
 # Problem Matchers Action
 
-This action adds problem matchers that scan the job log for errors and warnings from Gradle, Kotlin, and Android Lint. Any detected lines will be highlighted in the job log and an Annotation will be created, making it easier to see the problems when a job goes wrong.
+This action adds Problem Matchers that scan the job log for errors and warnings from Gradle, Kotlin, Dagger, and Android Lint. Any detected lines will be highlighted in the job log and an Annotation will be created, making it easier to see the problems when a job goes wrong. 
+
+For more info about Problem Matchers, see: https://github.com/actions/toolkit/blob/main/docs/problem-matchers.md  
 
 ## Usage
 
@@ -11,7 +13,7 @@ jobs:
   build:
     steps:
       - name: Problem Matchers
-        uses: Shared-CI-Action-Android/problem-matchers
+        uses: krogerco/Shared-CI-Action-Android/.github/actions/problem-matchers@<latest-version>
       - name: Build
         run: ./gradlew build
 ```

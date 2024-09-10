@@ -1,0 +1,2 @@
+# This should be detected by dagger-errors
+error: InjectProcessingStep was unable to process 'DependantClass(some.dependency.Class)' because 'some.dependency.Class' could not be resolved.
