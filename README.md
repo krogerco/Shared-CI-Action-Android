@@ -4,7 +4,7 @@ Shared actions used by Kroger's GitHub actions.
 
 ## Actions
 - [Build](.github/actions/build)
-    - Uses `gradle/gradle-build-action` and calls `assemble`
+    - Uses `gradle/actions/setup-gradle` and calls `assemble`
     - Inputs:
         - Java Version - 17 is recommended
 - [Code Coverage](.github/actions/code-coverage)
@@ -37,7 +37,7 @@ Shared actions used by Kroger's GitHub actions.
         - Semantic Release Version - 21+ recommended
         - Conventional Changelog Version - 5+ recommended
 - [Gradle Task](.github/actions/gradle-task)
-    - Uses `gradle/gradle-build-action` and calls the Gradle Command input.
+    - Uses `gradle/actions/setup-gradle` and calls the Gradle Command input.
     - Inputs:
         - Gradle Command - The gradle task to execute
         - Java Distribution - The distribution of Java to use
@@ -62,7 +62,7 @@ Shared actions used by Kroger's GitHub actions.
         - Semantic Release Version - 21+ recommended
         - Conventional Changelog Version - 5+ recommended
 - [Unit Tests](.github/actions/unit-tests)
-    - Uses `gradle/gradle-build-action` and calls the Test Command input. Test results are published using `mikepenz/action-junit-report`.
+    - Uses `gradle/actions/setup-gradle` and calls the Test Command input. Test results are published using `mikepenz/action-junit-report`.
     - Inputs:
         - Java Version - 17 is recommended
         - Test Command - The gradle task to run your tests, e.g. `test`
