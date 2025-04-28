@@ -16,7 +16,8 @@ runs:
         java-version: ${{ inputs.java_version }}
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
     - name: Gradle Publish
-      uses: gradle/gradle-build-action@v3
-      with:
-        arguments: publish
+      shell: bash
+      run: ./gradlew publish
