@@ -1,0 +1,97 @@
+name: CI Tests
+on: 
+  pull_request:
+    paths: 
+      - '.github/actions/commit-lint/**'
+      - '.github/workflows/pr_checks.yml'
+
+jobs:
+  commit-lint-tests:
+    name: Commit Lint Tests
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Prepare Single Good Commit Test
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "Actions"
+          
+          git checkout --orphan "test-single-good-commit-${{ github.sha }}-${{ github.run_id }}"
+          git rm -rf .
+          git commit --allow-empty -m 'chore: initial commit'
+          git tag 0.0.1
+          git commit --allow-empty -m 'feat: this commit message should pass muster'
+
+          git checkout ${{ github.sha }} -- .github/actions/commit-lint/action.yml
+      
+      - name: Single Good Commit Test
+        uses: ./.github/actions/commit-lint
+        with:
+          node_version: 20
+          commitlint_version: 17
+
+      - name: Prepare Single Bad Commit Test
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "Actions"
+          
+          git checkout --orphan "test-single-bad-commit-${{ github.sha }}-${{ github.run_id }}"
+          git rm -rf .
+          git commit --allow-empty -m 'chore: initial commit'
+          git tag 0.0.2
+          git commit --allow-empty -m 'This commit message is not allowed'
+
+          git checkout ${{ github.sha }} -- .github/actions/commit-lint/action.yml
+      
+      - name: Single Bad Commit Test
+        id: single-bad-commit
+        uses: ./.github/actions/commit-lint
+        continue-on-error: true
+        with:
+          node_version: 20
+          commitlint_version: 17
+
+      - name: Prepare Multiple Bad Commits Test
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "Actions"
+          
+          git checkout --orphan "test-multiple-bad-commits-${{ github.sha }}-${{ github.run_id }}"
+          git rm -rf .
+          git commit --allow-empty -m 'chore: initial commit'
+          git tag 0.0.3
+          git commit --allow-empty -m 'This commit message is not allowed'
+          git commit --allow-empty -m 'feet: this is also not allowed'
+          git commit --allow-empty -m 'third bad commit'
+
+          git checkout ${{ github.sha }} -- .github/actions/commit-lint/action.yml
+      
+      - name: Multiple Bad Commits Test
+        id: multiple-bad-commits
+        uses: ./.github/actions/commit-lint
+        continue-on-error: true
+        with:
+          node_version: 20
+          commitlint_version: 17
+
+      - name: Verify Negative Test Cases
+        run: |
+          result=0
+          
+          if [[ "${{ steps.single-bad-commit.outcome }}" == 'failure' ]]; then
+            echo "✅ Single Bad Commit Succeeded"
+          else 
+            echo "❌ Single Bad Commit Failed"
+            result=1
+          fi
+
+          if [[ "${{ steps.multiple-bad-commits.outcome }}" == 'failure' ]]; then
+            echo "✅ Multiple Bad Commits Succeeded"
+          else 
+            echo "❌ Multiple Bad Commits Failed"
+            result=1
+          fi
+
+          exit "$result"
+          
