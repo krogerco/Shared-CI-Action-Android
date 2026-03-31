@@ -31,6 +31,25 @@ jobs:
           node_version: 20
           commitlint_version: 17
 
+      - name: Prepare Long Body Good Commit Test
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "Actions"
+          
+          git checkout --orphan "test-single-good-commit-${{ github.sha }}-${{ github.run_id }}"
+          git rm -rf .
+          git commit --allow-empty -m 'chore: initial commit'
+          git tag 0.0.1
+          git commit --allow-empty -m 'feat: this commit with a long body should pass muster' -m 'Here is a body with a very long line length that exceeds 100 characters, but I say that is okay in my book.'
+
+          git checkout ${{ github.sha }} -- .github/actions/commit-lint/action.yml
+      
+      - name: Long Body Good Commit Test
+        uses: ./.github/actions/commit-lint
+        with:
+          node_version: 20
+          commitlint_version: 17
+
       - name: Prepare Single Bad Commit Test
         run: |
           git config user.email "actions@github.com"
