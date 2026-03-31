@@ -11,7 +11,7 @@ jobs:
     runs-on: [ ubuntu-latest ]
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Prepare Single Good Commit Test
         run: |
           git config user.email "actions@github.com"
@@ -36,7 +36,7 @@ jobs:
           git config user.email "actions@github.com"
           git config user.name "Actions"
           
-          git checkout --orphan "test-single-good-commit-${{ github.sha }}-${{ github.run_id }}"
+          git checkout --orphan "test-long-body-good-commit-${{ github.sha }}-${{ github.run_id }}"
           git rm -rf .
           git commit --allow-empty -m 'chore: initial commit'
           git tag 0.0.1
