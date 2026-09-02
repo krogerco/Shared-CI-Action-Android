@@ -20,15 +20,15 @@ runs:
   using: composite
   steps:
     - name: Java Setup
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v6
       with:
         distribution: ${{ inputs.java_distribution }}
         java-version: ${{ inputs.java_version }}
     - name: Setup Android SDK
       if: inputs.setup_android_sdk == 'true'
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
     - name: Setup Gradle
-      uses: gradle/actions/setup-gradle@v4
+      uses: gradle/actions/setup-gradle@v6
     - name: Run Gradle Command
       shell: bash
       run: ./gradlew ${{ inputs.gradle_command }}
