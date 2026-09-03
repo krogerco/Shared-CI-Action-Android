@@ -10,7 +10,7 @@ jobs:
     name: Commit Lint Tests
     runs-on: [ ubuntu-latest ]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Prepare Single Good Commit Test
         run: |
@@ -28,7 +28,7 @@ jobs:
       - name: Single Good Commit Test
         uses: ./.github/actions/commit-lint
         with:
-          node_version: 20
+          node_version: 24
           commitlint_version: 17
 
       - name: Prepare Single Bad Commit Test
@@ -49,7 +49,7 @@ jobs:
         uses: ./.github/actions/commit-lint
         continue-on-error: true
         with:
-          node_version: 20
+          node_version: 24
           commitlint_version: 17
 
       - name: Prepare Multiple Bad Commits Test
@@ -72,7 +72,7 @@ jobs:
         uses: ./.github/actions/commit-lint
         continue-on-error: true
         with:
-          node_version: 20
+          node_version: 24
           commitlint_version: 17
 
       - name: Prepare Long Body Good Commit Test
@@ -91,7 +91,7 @@ jobs:
       - name: Long Body Good Commit Test
         uses: ./.github/actions/commit-lint
         with:
-          node_version: 20
+          node_version: 24
           commitlint_version: 17
 
       - name: Verify Negative Test Cases
